@@ -1,0 +1,9 @@
+{
+  "bootstrap_expect": 1,
+  "datacenter": "local-vagrant",
+  "data_dir": "/opt/Consul/data",
+  "log_level": "debug",
+  "server": true,
+  "ui_dir": "/opt/Consul/dist",
+  "client_addr": "192.168.24.10"
+}
