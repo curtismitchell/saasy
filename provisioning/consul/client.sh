@@ -11,7 +11,7 @@
 
 dir="/opt/Consul"
 user="vagrant"
-cmd="consul agent -config-dir /opt/Consul/config/"
+cmd="consul agent -config-dir /etc/init/config/"
 
 name=`basename $0`
 pid_file="/var/run/$name.pid"

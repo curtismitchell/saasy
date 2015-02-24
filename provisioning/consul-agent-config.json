@@ -1,0 +1,9 @@
+{
+  "datacenter": "local-vagrant",
+  "data_dir": "/opt/Consul/data",
+  "log_level": "debug",
+  "server": false,
+  "client_addr": "192.168.24.30",
+  "bind_addr": "192.168.24.30",
+  "start_join": ["192.168.24.9"]
+}
