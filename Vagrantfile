@@ -19,14 +19,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   chipmunks.each_with_index do |cm, ndx|
     config.vm.define cm do |cbox|
       ip = ips[ndx]
-      cbox.vm.box = "ubuntu/trusty64"
+      cbox.vm.box = "chef/centos-7.0"
       cbox.vm.hostname = cm + ".local.dev"
       cbox.vm.network "private_network", ip: ip
-      #cbox.vm.provision "shell", path: "provisioning/ansible.sh"
       cbox.vm.provision "shell", inline: <<-SCRIPT
 mkdir -p /opt/Consul/data
 chown vagrant:vagrant /opt/Consul/data
-sudo cp /vagrant/provisioning/consul-upstart.conf /etc/init/consul.conf
 
 mkdir -p /etc/consul.d/server
 SCRIPT
@@ -82,7 +80,7 @@ sudo unzip /vagrant/bins/0.4.1_linux_amd64.zip -d /usr/bin
 mkdir -p /opt/Consul/data
 mkdir -p /opt/Consul/config
 
-sudo cat > /opt/Consul/config/consul-config.json <<- CFG
+sudo cat > /etc/consul.d/server/consul-config.json <<- CFG
 {
   "bootstrap": false,
   "datacenter": "local-vagrant",
@@ -95,7 +93,7 @@ sudo cat > /opt/Consul/config/consul-config.json <<- CFG
 }
 CFG
 
-echo '{"service": {"name":"mysql","tags": ["rdbs"], "port": 3306}}' > /opt/Consul/config/mysql.json
+echo '{"service": {"name":"mysql","tags": ["rdbs"], "port": 3306}}' > /etc/consul.d/server/mysql.json
 
 sudo chown -R vagrant: /opt/Consul
 sudo cp /vagrant/provisioning/consul-server.sh /etc/init.d/consul-server

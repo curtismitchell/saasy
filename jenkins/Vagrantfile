@@ -9,6 +9,7 @@ Vagrant.configure(2) do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
+  config.vbguest.auto_update = false
   config.vm.provider "virtualbox" do |vb|
     vb.memory = 256
     vb.cpus = 1
@@ -22,8 +23,13 @@ Vagrant.configure(2) do |config|
     sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
     yum -y install java-1.7.0-openjdk jenkins
     sudo service jenkins start
-  SHELL
-  
+
+    # curl https://packagecloud.io/install/repositories/scalr/scalr-server-oss/script.rpm | sudo bash
+    # yum install -y scalr-server
+SHELL
+
+
+
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
